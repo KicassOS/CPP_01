@@ -5,24 +5,28 @@
 #                                                     +:+ +:+         +:+      #
 #    By: pszleper <pszleper@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/05/11 18:16:54 by pszleper          #+#    #+#              #
-#    Updated: 2023/05/14 07:06:37 by pszleper         ###   ########.fr        #
+#    Created: 2023/04/09 16:09:59 by pszleper          #+#    #+#              #
+#    Updated: 2023/05/16 14:16:52 by pszleper         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 COMPILATION = c++ -Wall -Wextra -Werror -std=c++98
 
-SRC = megaphone.cpp
+SRC = main.cpp  newZombie.cpp  randomChump.cpp  Zombie.cpp
 
-NAME = megaphone
+OBJ = $(SRC:.cpp=.o)
+
+HEADER = Zombie.hpp
+
+NAME = ./Zombie
 
 all: $(NAME)
 
-$(NAME): megaphone.o
+$(NAME): $(OBJ)
 	$(COMPILATION) $^ -o $(NAME)
 
-megaphone.o: megaphone.cpp
-	$(COMPILATION) $(SRC) -c -o $@
+%.o: %.cpp
+	$(COMPILATION) $^ -c -o $@
 
 clean:
 	rm -f *.o

@@ -6,7 +6,7 @@
 #    By: pszleper <pszleper@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/09 16:09:59 by pszleper          #+#    #+#              #
-#    Updated: 2023/05/16 14:32:07 by pszleper         ###   ########.fr        #
+#    Updated: 2023/05/16 17:11:28 by pszleper         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,11 +22,11 @@ NAME = ./Zombie
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	$(COMPILATION) $^ -o $(NAME)
+$(NAME): $(OBJ) $(HEADER)
+	$(COMPILATION) $(OBJ) -o $(NAME)
 
-%.o: %.cpp
-	$(COMPILATION) $^ -c -o $@
+%.o: %.cpp $(HEADER)
+	$(COMPILATION) $< -c -o $@
 
 clean:
 	rm -f *.o

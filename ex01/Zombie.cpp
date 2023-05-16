@@ -6,7 +6,7 @@
 /*   By: pszleper <pszleper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 08:20:49 by pszleper          #+#    #+#             */
-/*   Updated: 2023/05/16 17:26:02 by pszleper         ###   ########.fr       */
+/*   Updated: 2023/05/16 17:40:16 by pszleper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 Zombie::Zombie(void)
 {
+	std::cout << "Default constructor called" << std::endl;
 	return;
 }
 

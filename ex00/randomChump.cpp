@@ -6,7 +6,7 @@
 /*   By: pszleper <pszleper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 08:43:24 by pszleper          #+#    #+#             */
-/*   Updated: 2023/05/16 14:41:57 by pszleper         ###   ########.fr       */
+/*   Updated: 2023/05/16 15:52:27 by pszleper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,7 @@
 
 void	randomChump(std::string name)
 {
-	
+	Zombie random = Zombie(name);
+
+	random.announce();
 }

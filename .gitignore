@@ -1,2 +1,6 @@
 .vscode
 fr.subject.pdf
+
+**/*.o
+
+ex00/Zombie

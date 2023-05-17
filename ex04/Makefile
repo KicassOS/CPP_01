@@ -6,24 +6,26 @@
 #    By: pszleper <pszleper@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/09 16:09:59 by pszleper          #+#    #+#              #
-#    Updated: 2023/05/16 20:32:53 by pszleper         ###   ########.fr        #
+#    Updated: 2023/05/17 22:21:49 by pszleper         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 COMPILATION = c++ -Wall -Wextra -Werror -std=c++98
 
-SRC = main.cpp
+SRC = main.cpp utils.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
-NAME = ./PointlessViolence
+HEADER = SedIsForLosers.hpp
+
+NAME = ./SedIsForLosers
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) $(HEADER)
 	$(COMPILATION) $(OBJ) -o $(NAME)
 
-%.o: %.cpp
+%.o: %.cpp $(HEADER)
 	$(COMPILATION) $< -c -o $@
 
 clean:

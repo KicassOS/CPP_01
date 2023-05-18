@@ -1,0 +1,2 @@
+Too few arguments test:
+The program does not create the test1.txt.replace file and outputs the USAGE instructions

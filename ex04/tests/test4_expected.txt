@@ -1,0 +1,2 @@
+Input file without read permission test:
+The program does not create the test4.txt.replace file and outputs that the input file could not be opened

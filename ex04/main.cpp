@@ -6,41 +6,45 @@
 /*   By: pszleper <pszleper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 19:39:42 by pszleper          #+#    #+#             */
-/*   Updated: 2023/05/17 22:20:40 by pszleper         ###   ########.fr       */
+/*   Updated: 2023/05/18 19:50:28 by pszleper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "SedIsForLosers.hpp"
 
-std::string	ft_replace_occurrences_in_line(std::string& buffer, std::string& to_find, std::string& replacement, size_t& occ_index, size_t& line_length)
+std::string	ft_replace_occurrences_in_line(std::string& line_buffer, std::string& to_find, std::string& replacement, size_t occ_index)
 {
-	// copy the contents from the start of buffer up until the occurence into temp
-	std::string	temp = buffer.substr(0, occ_index);
+	std::string	temp					= "";
+	size_t		endof_last_occurrence	= 0;
+	size_t		line_buffer_length		= line_buffer.length();
+	size_t		to_find_length			= to_find.length();
 
-	// while there are still occurences to be found in buffer, update the occurrence index and replace
-	while ((occ_index = buffer.find(to_find)) < line_length)
+	// while we keep finding matches
+	while ((occ_index = line_buffer.find(to_find, endof_last_occurrence)) < line_buffer_length)
 	{
-		temp = buffer.substr(0, occ_index);
-		// replace the current occurence
+		// add any characters between the endof_last_occurrence and the current occurrence to the end of temp
+		temp += line_buffer.substr(endof_last_occurrence, occ_index - endof_last_occurrence);
+		// replace the current occurrence
 		temp += replacement;
-		// add the remaining buffer contents
-		temp += buffer.substr(occ_index + to_find.length());
-		buffer = temp;
+		// update the end of temp and the index of the last occurrence
+		endof_last_occurrence = occ_index + to_find_length;
 	}
-	return (buffer);
+	// add the rest of line buffer after the last match
+	temp += line_buffer.substr(endof_last_occurrence, line_buffer.length() - 1);
+	return (temp);
 }
 
 void	ft_replace(std::ifstream& input, std::ofstream& output, std::string& buffer, std::string& to_find, std::string& replacement)
 {
-	size_t	occurrence_index = 0;
-	size_t	line_length = 0;
+	size_t	occurrence_index	= 0;
+	size_t	line_length			= 0;
 
 	while (std::getline(input, buffer))
 	{
 		occurrence_index = buffer.find(to_find);
 		line_length = buffer.length();
 		if (occurrence_index < line_length) // found a match
-			buffer = ft_replace_occurrences_in_line(buffer, to_find, replacement, occurrence_index, line_length);
+			buffer = ft_replace_occurrences_in_line(buffer, to_find, replacement, occurrence_index);
 		output << buffer;
 		if (!input.eof())
 			output << std::endl;
@@ -69,9 +73,9 @@ int	main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 
-	std::string	filebuffer = "";
-	std::string	to_replace = argv[2];
-	std::string	replace_with = argv[3];
+	std::string	filebuffer		= "";
+	std::string	to_replace		= argv[2];
+	std::string	replace_with	= argv[3];
 
 	ft_replace(input_filestream, output_filestream, filebuffer, to_replace, replace_with);
 

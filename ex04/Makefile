@@ -6,7 +6,7 @@
 #    By: pszleper <pszleper@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/09 16:09:59 by pszleper          #+#    #+#              #
-#    Updated: 2023/05/17 22:21:49 by pszleper         ###   ########.fr        #
+#    Updated: 2023/05/18 13:13:22 by pszleper         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,5 +33,8 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
+
+test:
+	cd tests/ && ./test.sh
 
 re: fclean all

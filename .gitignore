@@ -8,5 +8,6 @@ ex01/ZombieHorde
 ex02/HiThisIsBrain
 ex03/PointlessViolence
 ex04/SedIsForLosers
+ex04/**/*.replace
 ex05/Harl2.0
 ex06/HarlFilter

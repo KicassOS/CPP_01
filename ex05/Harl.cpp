@@ -6,7 +6,7 @@
 /*   By: pszleper <pszleper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 22:26:04 by pszleper          #+#    #+#             */
-/*   Updated: 2023/05/18 21:26:02 by pszleper         ###   ########.fr       */
+/*   Updated: 2023/05/20 17:15:25 by pszleper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 Harl::Harl()
 {
-	this->*func[1] =  
 	return;
 }
 
@@ -25,13 +24,12 @@ Harl::~Harl()
 
 void	Harl::complain( std::string level )
 {
-	Harl::*func[4](void);
-	this->chooseFunction();
-}
-
-void	Harl::chooseFunction()
-{
-
+	std::string	warning_levels[4]			= {"DEBUG", "INFO", "WARNING", "ERROR"};
+	void		(Harl::*func_ptrs[4])(void) = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
+	int			i							= 0;
+	for (i = 0; i < 4 && warning_levels[i] != level; i++)
+		;
+	(this->*func_ptrs[i])();
 }
 
 void Harl::debug( void )

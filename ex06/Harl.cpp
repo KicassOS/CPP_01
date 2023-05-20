@@ -6,7 +6,7 @@
 /*   By: pszleper <pszleper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 22:26:04 by pszleper          #+#    #+#             */
-/*   Updated: 2023/05/18 20:51:40 by pszleper         ###   ########.fr       */
+/*   Updated: 2023/05/20 17:59:02 by pszleper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 
 Harl::Harl()
 {
-	this->func["DEBUG"] = debug;
-	this->func["INFO"] = info;
-	this->func["WARNING"] = warning;
-	this->func["ERROR"] = error;
 	return;
 }
 
@@ -28,10 +24,37 @@ Harl::~Harl()
 
 void	Harl::complain( std::string level )
 {
-	this->func[level]();
-	
+	std::string	warning_levels[4]			= {"DEBUG", "INFO", "WARNING", "ERROR"};
+	void		(Harl::*func_ptrs[4])(void) = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
+	int			i							= 0;
+	for (i = 0; i < 4 && warning_levels[i] != level; i++)
+		;
+	switch(i)
+	{
+		case 0:
+			(this->*func_ptrs[0])();
+			(this->*func_ptrs[1])();
+			(this->*func_ptrs[2])();
+			(this->*func_ptrs[3])();
+			break;
+		case 1:
+			(this->*func_ptrs[1])();
+			(this->*func_ptrs[2])();
+			(this->*func_ptrs[3])();
+			break;
+		case 2:
+			(this->*func_ptrs[2])();
+			(this->*func_ptrs[3])();
+			break;
+		case 3:
+			(this->*func_ptrs[3])();
+			break;
+		default:
+			std::cout << GENERIC_RESPONSE << std::endl;
+			break;
+	}
 }
-	
+
 void Harl::debug( void )
 {
 	std::cout << "I love having extra bacon for my 7XL-double-cheese-triple-pickle-special-ketchup burger. I really do !" << std::endl;
